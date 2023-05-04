@@ -44,6 +44,8 @@
             this.txtNewPassword = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
+            this.cbOldPassword = new System.Windows.Forms.CheckBox();
+            this.cbNewPassword = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -171,6 +173,8 @@
             // groupBox1
             // 
             this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.groupBox1.Controls.Add(this.cbNewPassword);
+            this.groupBox1.Controls.Add(this.cbOldPassword);
             this.groupBox1.Controls.Add(this.txtOldPassword);
             this.groupBox1.Controls.Add(this.lbUserPassword);
             this.groupBox1.Controls.Add(this.txtNewPassword);
@@ -178,7 +182,7 @@
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Location = new System.Drawing.Point(124, 342);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(432, 98);
+            this.groupBox1.Size = new System.Drawing.Size(432, 129);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             // 
@@ -186,7 +190,7 @@
             // 
             this.txtOldPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOldPassword.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtOldPassword.Location = new System.Drawing.Point(25, 30);
+            this.txtOldPassword.Location = new System.Drawing.Point(22, 30);
             this.txtOldPassword.Name = "txtOldPassword";
             this.txtOldPassword.Size = new System.Drawing.Size(183, 20);
             this.txtOldPassword.TabIndex = 5;
@@ -197,7 +201,7 @@
             this.lbUserPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lbUserPassword.AutoSize = true;
             this.lbUserPassword.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbUserPassword.Location = new System.Drawing.Point(22, 16);
+            this.lbUserPassword.Location = new System.Drawing.Point(19, 16);
             this.lbUserPassword.Name = "lbUserPassword";
             this.lbUserPassword.Size = new System.Drawing.Size(81, 13);
             this.lbUserPassword.TabIndex = 4;
@@ -207,7 +211,7 @@
             // 
             this.txtNewPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNewPassword.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtNewPassword.Location = new System.Drawing.Point(233, 30);
+            this.txtNewPassword.Location = new System.Drawing.Point(230, 30);
             this.txtNewPassword.Name = "txtNewPassword";
             this.txtNewPassword.Size = new System.Drawing.Size(183, 20);
             this.txtNewPassword.TabIndex = 5;
@@ -218,7 +222,7 @@
             this.lblPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblPassword.AutoSize = true;
             this.lblPassword.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblPassword.Location = new System.Drawing.Point(230, 16);
+            this.lblPassword.Location = new System.Drawing.Point(227, 16);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(81, 13);
             this.lblPassword.TabIndex = 4;
@@ -231,13 +235,35 @@
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(326, 67);
+            this.button3.Location = new System.Drawing.Point(323, 98);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(90, 25);
             this.button3.TabIndex = 18;
             this.button3.Text = "Save";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // cbOldPassword
+            // 
+            this.cbOldPassword.AutoSize = true;
+            this.cbOldPassword.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbOldPassword.Location = new System.Drawing.Point(22, 56);
+            this.cbOldPassword.Name = "cbOldPassword";
+            this.cbOldPassword.Size = new System.Drawing.Size(102, 17);
+            this.cbOldPassword.TabIndex = 19;
+            this.cbOldPassword.Text = "Show Password";
+            this.cbOldPassword.UseVisualStyleBackColor = true;
+            // 
+            // cbNewPassword
+            // 
+            this.cbNewPassword.AutoSize = true;
+            this.cbNewPassword.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cbNewPassword.Location = new System.Drawing.Point(230, 56);
+            this.cbNewPassword.Name = "cbNewPassword";
+            this.cbNewPassword.Size = new System.Drawing.Size(102, 17);
+            this.cbNewPassword.TabIndex = 20;
+            this.cbNewPassword.Text = "Show Password";
+            this.cbNewPassword.UseVisualStyleBackColor = true;
             // 
             // Admin
             // 
@@ -283,5 +309,7 @@
         private System.Windows.Forms.TextBox txtNewPassword;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.CheckBox cbNewPassword;
+        private System.Windows.Forms.CheckBox cbOldPassword;
     }
 }

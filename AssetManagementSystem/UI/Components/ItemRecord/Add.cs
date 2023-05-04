@@ -46,6 +46,7 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             rtbSpecification.Text = "";
             dtp_DOP.Value = DateTime.Now;
             cmb_Color.SelectedIndex = 0;
+            cmb_ConditionCategory.SelectedIndex = 0;
 
             pbImage.Image = null;
             tbPrice.Text = "";
@@ -99,7 +100,7 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
                         tbPrice.Text,
                         cmb_ConditionCategory.SelectedItem?.ToString(),
                         tbQuantity.Text,
-                        tb_MSN.SelectedText,
+                        tb_MSN.Text,
                         document,
                         rtb_Remarks.Text,
                         tbResponsibility.Text,
@@ -130,45 +131,83 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             int iquantity;
             // Perform validation checks
             if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Name cannot be null or empty.");
+            {
+                tbItemName.Focus();
+                throw new ArgumentException("Please enter the item name.");
+            }
             if (string.IsNullOrWhiteSpace(price))
+            {
+                tbPrice.Focus();
                 throw new ArgumentException("Please enter the asset price.");
+            }
             try
             {
                 dprice = Convert.ToDecimal(price);
             }
             catch (Exception)
             {
+                tbPrice.Focus();
                 throw new ArgumentException("Price must be a number.");
             }
             if (dprice < 0)
+            {
+                tbPrice.Focus();
                 throw new ArgumentException("Price must be a positive value.");
+            }
             if (string.IsNullOrWhiteSpace(quantity))
+            {
+                tbQuantity.Focus();
                 throw new ArgumentException("Please enter the asset quantity.");
+            }
             try
             {
                 iquantity = Convert.ToInt32(quantity);
             }
             catch (Exception)
             {
-                throw new ArgumentException("Quantity must be a number.");
+                tbQuantity.Focus();
+                throw new ArgumentException("The Price field only accepts numbers (0-9) and a decimal (.) sign.");
             }
             if (iquantity < 0)
+            {
+                tbQuantity.Focus();
                 throw new ArgumentException("Quantity must be a positive integer.");
+            }
             if (string.IsNullOrWhiteSpace(brand))
+            {
+                tbBrand.Focus();
                 throw new ArgumentException("Please enter the asset brand.");
+            }
             if (string.IsNullOrWhiteSpace(conditionCategory))
+            {
+                cmb_ConditionCategory.Focus();
                 throw new ArgumentException("Please enter the asset condition category.");
+            }
             if (string.IsNullOrWhiteSpace(colour))
+            {
+                cmb_Color.Focus();
                 throw new ArgumentException("Please select an asset color.");
+            }
             if (string.IsNullOrWhiteSpace(specifications))
+            {
+                rtbSpecification.Focus();
                 throw new ArgumentException("Please enter the asset specifications.");
+            }
             if (string.IsNullOrWhiteSpace(minuteSheetNumber))
+            {
+                tb_MSN.Focus();
                 throw new ArgumentException("Please enter the minute sheet number.");
+            }
             if (string.IsNullOrWhiteSpace(responsibleOfficial))
+            {
+                tbResponsibility.Focus();
                 throw new ArgumentException("Please enter the responsible official name ");
+            }
             if (string.IsNullOrWhiteSpace(place))
+            {
+                tbPlace.Focus();
                 throw new ArgumentException("Please enter the distribution place.");
+            }
             
 
             var distribution = new Distribution()

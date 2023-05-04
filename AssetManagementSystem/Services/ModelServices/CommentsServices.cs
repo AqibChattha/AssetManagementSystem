@@ -56,13 +56,16 @@ namespace AssetManagementSystem.Services.ModelServices
                     {
                         while (reader.Read())
                         {
-                            comments.Add(new PreviousComments
+                            if (!string.IsNullOrWhiteSpace(Convert.ToString(reader["comments"])))
                             {
-                                Id = Convert.ToInt32(reader["id"]),
-                                AssetId = Convert.ToInt32(reader["asset_id"]),
-                                commentTimeStamp = Convert.ToDateTime(reader["comment_timestamp"]),
-                                comments = Convert.ToString(reader["comments"]),
-                            });
+                                comments.Add(new PreviousComments
+                                {
+                                    Id = Convert.ToInt32(reader["id"]),
+                                    AssetId = Convert.ToInt32(reader["asset_id"]),
+                                    commentTimeStamp = Convert.ToDateTime(reader["comment_timestamp"]),
+                                    comments = Convert.ToString(reader["comments"]),
+                                });
+                            }
                         }
                     }
                 }
@@ -70,7 +73,7 @@ namespace AssetManagementSystem.Services.ModelServices
 
             return comments;
         }
-        
+
         public static PreviousComments GetCommentById(int id)
         {
             using (var connection = new SQLiteConnection(DatabaseHelper.ConnectionString))

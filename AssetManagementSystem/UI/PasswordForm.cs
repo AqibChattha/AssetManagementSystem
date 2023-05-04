@@ -24,7 +24,7 @@ namespace AssetManagementSystem.UI
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {            
-            if (textBox1.Text.Equals(user.Password))
+            if (txtPassword.Text.Equals(user.Password))
             {
                 this.DialogResult = DialogResult.Yes;
             }
@@ -33,6 +33,11 @@ namespace AssetManagementSystem.UI
                 MessageBox.Show("Incorrect Password, try again.", "Wrong Password", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             this.Close();
+        }
+
+        private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            txtPassword.UseSystemPasswordChar = !cbShowPassword.Checked;
         }
     }
 }

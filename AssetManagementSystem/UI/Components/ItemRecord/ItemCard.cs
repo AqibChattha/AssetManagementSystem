@@ -78,11 +78,27 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
                         try
                         {
                             AssetServices.DeleteAsset(_asset.Id);
+                            Archive.Instance.RemoveAssetCard(this);
                         }
                         catch (Exception)
                         {
 
                         }
+                    }
+                }
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Are you sure you want to permanently delete this assest?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        AssetServices.DeleteAsset(_asset.Id);
+                        Archive.Instance.RemoveAssetCard(this);
+                    }
+                    catch (Exception)
+                    {
                     }
                 }
             }

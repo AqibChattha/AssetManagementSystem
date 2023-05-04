@@ -181,15 +181,12 @@ namespace AssetManagementSystem.Services.ModelServices
                                 command2.ExecuteNonQuery();
                             }
 
-                            if (!string.IsNullOrWhiteSpace(asset.Comments))
+                            using (var command3 = new SQLiteCommand("INSERT INTO comments (asset_id, comment_timestamp, comments) VALUES (@assetId, @commentTimeStamp, @comments)", connection))
                             {
-                                using (var command3 = new SQLiteCommand("INSERT INTO comments (asset_id, comment_timestamp, comments) VALUES (@assetId, @commentTimeStamp, @comments)", connection))
-                                {
-                                    command3.Parameters.AddWithValue("@assetId", id);
-                                    command3.Parameters.AddWithValue("@commentTimeStamp", DateTime.Now);
-                                    command3.Parameters.AddWithValue("@comments", asset.Comments);
-                                    command3.ExecuteNonQuery();
-                                }
+                                command3.Parameters.AddWithValue("@assetId", id);
+                                command3.Parameters.AddWithValue("@commentTimeStamp", DateTime.Now);
+                                command3.Parameters.AddWithValue("@comments", asset.Comments);
+                                command3.ExecuteNonQuery();
                             }
                         }
                         transaction.Commit();

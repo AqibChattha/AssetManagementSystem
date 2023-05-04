@@ -72,7 +72,8 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             if (comments.Count <= 0)
             {
                 Label lb = new Label();
-                lb.Text = "No to show comments yet.";
+                lb.AutoSize= true;
+                lb.Text = "     There are no comments to show yet.";
                 pnlComments.Controls.Add(lb);
             }
             else
