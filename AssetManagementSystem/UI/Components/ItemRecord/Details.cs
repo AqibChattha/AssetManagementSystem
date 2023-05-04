@@ -4,18 +4,23 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AssetManagementSystem.UI.Components.ItemRecord
 {
     public partial class Details : UserControl
     {
+        private Asset _asset;
 
         private static Details _instance;
         public static Details Instance
@@ -35,6 +40,8 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
         
         public void Refresh(Asset asset)
         {
+            _asset = asset;
+
             lbItemName.Text = asset.Name;
             lbConditionCategory.Text = asset.ConditionCategory;
             lbItemNumber.Text = "Item # " + asset.Id;
@@ -42,13 +49,6 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             tbBrand.Text = asset.Brand;
             rtbSpecification.Text = asset.Specifications;
             dtp_DOP.Value = asset.ProcurementDate;
-            foreach (var item in cmb_Color.Items)
-            {
-                if (item.ToString().Equals(asset.Colour))
-                {
-                    cmb_Color.SelectedItem = item;
-                }
-            }
             if (asset.Image != null)
             {
                 pbImage.Image = System.Drawing.Image.FromStream(new MemoryStream(asset.Image));
@@ -57,6 +57,7 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             tbQuantity.Text = asset.Quantity.ToString();
             tb_MSN.Text = asset.MinuteSheetNumber;
             rtb_Remarks.Text = asset.Comments;
+            cmb_Color.Text = asset.Colour;
 
             tbResponsibility.Text = asset.Distribution.Responsibility;
             tbPlace.Text = asset.Distribution.Place;
@@ -68,11 +69,20 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
         private void LoadComments(List<PreviousComments> comments)
         {
             pnlComments.Controls.Clear();
-            foreach (var item in comments)
+            if (comments.Count <= 0)
             {
-                PreviousRemark previousRemark = new PreviousRemark(item);
-                pnlComments.Controls.Add(previousRemark);
-                previousRemark.Dock = DockStyle.Top;
+                Label lb = new Label();
+                lb.Text = "No to show comments yet.";
+                pnlComments.Controls.Add(lb);
+            }
+            else
+            {
+                foreach (var item in comments)
+                {
+                    PreviousRemark previousRemark = new PreviousRemark(item);
+                    pnlComments.Controls.Add(previousRemark);
+                    previousRemark.Dock = DockStyle.Top;
+                }
             }
         }
 
@@ -85,6 +95,40 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             catch (Exception)
             {
 
+            }
+        }
+
+        private void btn_MSN_Docunent_Click(object sender, EventArgs e)
+        {
+            if (_asset.MinuteSheetDocument != null)
+            {
+                //using (var dialog = new FolderBrowserDialog())
+                //{
+                //    DialogResult result = dialog.ShowDialog();
+                //    if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(dialog.SelectedPath))
+                //    {
+                        try
+                        {
+                            //string path = Path.Combine(dialog.SelectedPath, _asset.MS_DocumentName);
+
+                            string extension = Path.GetExtension(_asset.MS_DocumentName);
+
+                            string newFile = "ViewDocument" + extension;
+                            
+                            File.WriteAllBytes(newFile, _asset.MinuteSheetDocument);
+
+                            Process.Start(newFile);
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                //        }
+                //    }
+                //}
+                //else
+                //{
+                //    MessageBox.Show("No document to view.", "Not found", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
     }

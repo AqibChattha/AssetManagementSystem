@@ -20,6 +20,7 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
     {
         private Asset assetData;
         private byte[] document;
+        private string documentName;
 
         // Singleton pattern to ensure only one instance of this class is instantiated.
         private static Add _instance;
@@ -45,14 +46,22 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             rtbSpecification.Text = "";
             dtp_DOP.Value = DateTime.Now;
             cmb_Color.SelectedIndex = 0;
+
             pbImage.Image = null;
             tbPrice.Text = "";
             cmb_ConditionCategory.SelectedIndex = 0;
             tbQuantity.Text = "";
             tb_MSN.Text = "";
+
             rtb_Remarks.Text = "";
             btn_MSN_Docunent.Text = "Upload Document";
             btn_Image.Text = "Upload Image";
+            documentName = "";
+            document = null;
+
+            tbResponsibility.Text = "";
+            tbPlace.Text = "";
+            dtp_DOI.Value = DateTime.Now;
         }
 
         override
@@ -60,7 +69,7 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
         {
             ClearAllFields();
         }
-        
+
         public byte[] ImageToByteArray(Image image)
         {
             if (image == null)
@@ -78,16 +87,18 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
         {
             try
             {
-                if (AddUpdateAsset(
+
+
+                if (AddAsset(
                         tbItemName.Text,
                         tbBrand.Text,
                         rtbSpecification.Text,
                         dtp_DOP.Value,
-                        cmb_Color.SelectedItem?.ToString(),
+                        cmb_Color.Text.ToString(),
                         ImageToByteArray(pbImage.Image),
-                        Convert.ToDecimal(tbPrice.Text),
+                        tbPrice.Text,
                         cmb_ConditionCategory.SelectedItem?.ToString(),
-                        Convert.ToInt32(tbQuantity.Text),
+                        tbQuantity.Text,
                         tb_MSN.SelectedText,
                         document,
                         rtb_Remarks.Text,
@@ -96,42 +107,69 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
                         dtp_DOI.Value
                     ))
                 {
+                    MessageBox.Show("Asset added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     ClearAllFields();
                     MainForm.Instance.ShowUserControl(ViewAll.Instance);
                 }
                 else
                 {
-                    MessageBox.Show("Sorry there was an error performing the task, Please make sure you entered the correct information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please enter input in all the fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                if (ex is ArgumentException)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    MessageBox.Show("There was an error performing the task, Please make sure you entered the correct information. If this still doesn't fix your issue try restarting the application.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        public bool AddUpdateAsset(string name, string brand, string specifications, DateTime procurementDate,
-            string colour, byte[] image, decimal price, string conditionCategory, int quantity, string minuteSheetNumber, byte[] minuteSheetDocument, string comments,
+        public bool AddAsset(string name, string brand, string specifications, DateTime procurementDate,
+            string colour, byte[] image, string price, string conditionCategory, string quantity, string minuteSheetNumber, byte[] minuteSheetDocument, string comments,
             string responsibleOfficial, string place, DateTime doi)
         {
+            decimal dprice;
+            int iquantity;
             // Perform validation checks
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Name cannot be null or empty.");
-            if (string.IsNullOrWhiteSpace(conditionCategory))
-                throw new ArgumentException("Condition category cannot be null or empty.");
-            if (quantity < 0)
+            if (string.IsNullOrWhiteSpace(price))
+                throw new ArgumentException("Please enter the asset price.");
+            try
+            {
+                dprice = Convert.ToDecimal(price);
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Price must be a number.");
+            }
+            if (dprice < 0)
+                throw new ArgumentException("Price must be a positive value.");
+            if (string.IsNullOrWhiteSpace(quantity))
+                throw new ArgumentException("Please enter the asset quantity.");
+            try
+            {
+                iquantity = Convert.ToInt32(quantity);
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Quantity must be a number.");
+            }
+            if (iquantity < 0)
                 throw new ArgumentException("Quantity must be a positive integer.");
+            if (string.IsNullOrWhiteSpace(brand))
+                throw new ArgumentException("Please enter the asset brand.");
+            if (string.IsNullOrWhiteSpace(conditionCategory))
+                throw new ArgumentException("Please enter the asset condition category.");
+            if (string.IsNullOrWhiteSpace(colour))
+                throw new ArgumentException("Please select an asset color.");
+            if (string.IsNullOrWhiteSpace(specifications))
+                throw new ArgumentException("Please enter the asset specifications.");
+            if (string.IsNullOrWhiteSpace(minuteSheetNumber))
+                throw new ArgumentException("Please enter the minute sheet number.");
             if (string.IsNullOrWhiteSpace(responsibleOfficial))
-                throw new ArgumentException("Responsible official name cannot be null or empty.");
+                throw new ArgumentException("Please enter the responsible official name ");
             if (string.IsNullOrWhiteSpace(place))
-                throw new ArgumentException("Place cannot be null or empty.");
+                throw new ArgumentException("Please enter the distribution place.");
+            
 
             var distribution = new Distribution()
             {
@@ -147,11 +185,12 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
                 ProcurementDate = procurementDate,
                 Colour = colour,
                 Image = image,
-                Price = price,
+                Price = dprice,
                 ConditionCategory = conditionCategory,
-                Quantity = quantity,
+                Quantity = iquantity,
                 MinuteSheetNumber = minuteSheetNumber,
                 MinuteSheetDocument = minuteSheetDocument,
+                MS_DocumentName = documentName,
                 Comments = comments,
                 Distribution = distribution
             };
@@ -166,6 +205,7 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             {
                 // Store the document bytes in the local property
                 document = File.ReadAllBytes(dialog.FileName);
+                documentName = dialog.SafeFileName;
 
                 // Change the button text to indicate that a file has been selected
                 btn_MSN_Docunent.Text = Path.GetFileName(dialog.FileName);
@@ -190,6 +230,19 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
                 {
                     MessageBox.Show("Error loading image: " + ex.Message);
                 }
+            }
+        }
+
+        private void dtp_DOP_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmb_ConditionCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmb_ConditionCategory.SelectedItem != null && cmb_ConditionCategory.SelectedItem.ToString().Equals("Unserviceable (US)"))
+            {
+                MessageBox.Show("The asset will be added to the archive by selecting the Unserviceable (US) option.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

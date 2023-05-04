@@ -54,6 +54,7 @@ namespace AssetManagementSystem.Services.ModelServices
                                 Quantity = Convert.ToInt32(reader["quantity"]),
                                 MinuteSheetNumber = reader["minute_sheet_number"].ToString(),
                                 MinuteSheetDocument = reader["minute_sheet_document"] == DBNull.Value ? null : (byte[])reader["minute_sheet_document"],
+                                MS_DocumentName = reader["m_s_document_name"].ToString(),
                                 Comments = reader["comments"].ToString(),
                                 Distribution = DistributionServices.GetDistributionByAssetId(Convert.ToInt32(reader["id"]))
                             };
@@ -76,7 +77,7 @@ namespace AssetManagementSystem.Services.ModelServices
             int totalAssets = 0;
             using (var connection = new SQLiteConnection(DatabaseHelper.ConnectionString))
             {
-                connection.Open(); 
+                connection.Open();
                 string queriy = "";
                 if (isServiceable == null)
                 {
@@ -125,6 +126,7 @@ namespace AssetManagementSystem.Services.ModelServices
                                 Quantity = reader.GetInt32(reader.GetOrdinal("quantity")),
                                 MinuteSheetNumber = reader.GetString(reader.GetOrdinal("minute_sheet_number")),
                                 MinuteSheetDocument = reader.IsDBNull(reader.GetOrdinal("minute_sheet_document")) ? null : (byte[])reader.GetValue(reader.GetOrdinal("minute_sheet_document")),
+                                MS_DocumentName = reader.GetString(reader.GetOrdinal("m_s_document_name")),
                                 Comments = reader.IsDBNull(reader.GetOrdinal("comments")) ? null : reader.GetString(reader.GetOrdinal("comments")),
                                 Distribution = DistributionServices.GetDistributionByAssetId(Convert.ToInt32(reader["id"]))
                             };
@@ -143,49 +145,54 @@ namespace AssetManagementSystem.Services.ModelServices
                 using (var connection = new SQLiteConnection(DatabaseHelper.ConnectionString))
                 {
                     connection.Open();
-
-                    string query = @"INSERT INTO assets 
-                                (name, brand, specifications, procurement_date, colour, image, price, condition_category, quantity, minute_sheet_number, minute_sheet_document, comments) 
+                    using (var transaction = connection.BeginTransaction())
+                    {
+                        string query = @"INSERT INTO assets 
+                                (name, brand, specifications, procurement_date, colour, image, price, condition_category, quantity, minute_sheet_number, minute_sheet_document, m_s_document_name, comments) 
                                 VALUES 
-                                (@name, @brand, @specifications, @procurement_date, @colour, @image, @price, @condition_category, @quantity, @minute_sheet_number, @minute_sheet_document, @comments);
+                                (@name, @brand, @specifications, @procurement_date, @colour, @image, @price, @condition_category, @quantity, @minute_sheet_number, @minute_sheet_document, @m_s_document_name, @comments);
                                 SELECT last_insert_rowid();";
 
-                    using (var command = new SQLiteCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@name", asset.Name);
-                        command.Parameters.AddWithValue("@brand", asset.Brand ?? (object)DBNull.Value);
-                        command.Parameters.AddWithValue("@specifications", asset.Specifications ?? (object)DBNull.Value);
-                        command.Parameters.AddWithValue("@procurement_date", asset.ProcurementDate);
-                        command.Parameters.AddWithValue("@colour", asset.Colour ?? (object)DBNull.Value);
-                        command.Parameters.AddWithValue("@image", asset.Image ?? (object)DBNull.Value);
-                        command.Parameters.AddWithValue("@price", asset.Price);
-                        command.Parameters.AddWithValue("@condition_category", asset.ConditionCategory);
-                        command.Parameters.AddWithValue("@quantity", asset.Quantity);
-                        command.Parameters.AddWithValue("@minute_sheet_number", asset.MinuteSheetNumber);
-                        command.Parameters.AddWithValue("@minute_sheet_document", asset.MinuteSheetDocument ?? (object)DBNull.Value);
-                        command.Parameters.AddWithValue("@comments", asset.Comments ?? (object)DBNull.Value);
-
-                        int id = Convert.ToInt32(command.ExecuteScalar());
-
-                        string query2 = "INSERT INTO distributions(asset_id, responsibility, place, issue_date) VALUES(@asset_id, @responsibility, @place, @issue_date)";
-                        using (SQLiteCommand command2 = new SQLiteCommand(query2, connection))
+                        using (var command = new SQLiteCommand(query, connection))
                         {
-                            command2.Parameters.AddWithValue("@asset_id", id);
-                            command2.Parameters.AddWithValue("@responsibility", asset.Distribution.Responsibility);
-                            command2.Parameters.AddWithValue("@place", asset.Distribution.Place);
-                            command2.Parameters.AddWithValue("@issue_date", asset.Distribution.IssueDate);
-                            command2.ExecuteNonQuery();
-                        }
-                        
-                        using (var command3 = new SQLiteCommand("INSERT INTO comments (asset_id, comment_timestamp, comments) VALUES (@assetId, @commentTimeStamp, @comments)", connection))
-                        {
-                            command3.Parameters.AddWithValue("@assetId", id);
-                            command3.Parameters.AddWithValue("@commentTimeStamp", DateTime.Now);
-                            command3.Parameters.AddWithValue("@comments", asset.Comments);
-                            command3.ExecuteNonQuery();
-                        }
+                            command.Parameters.AddWithValue("@name", asset.Name);
+                            command.Parameters.AddWithValue("@brand", asset.Brand ?? (object)DBNull.Value);
+                            command.Parameters.AddWithValue("@specifications", asset.Specifications ?? (object)DBNull.Value);
+                            command.Parameters.AddWithValue("@procurement_date", asset.ProcurementDate);
+                            command.Parameters.AddWithValue("@colour", asset.Colour ?? (object)DBNull.Value);
+                            command.Parameters.AddWithValue("@image", asset.Image ?? (object)DBNull.Value);
+                            command.Parameters.AddWithValue("@price", asset.Price);
+                            command.Parameters.AddWithValue("@condition_category", asset.ConditionCategory);
+                            command.Parameters.AddWithValue("@quantity", asset.Quantity);
+                            command.Parameters.AddWithValue("@minute_sheet_number", asset.MinuteSheetNumber);
+                            command.Parameters.AddWithValue("@minute_sheet_document", asset.MinuteSheetDocument ?? (object)DBNull.Value);
+                            command.Parameters.AddWithValue("@m_s_document_name", asset.MS_DocumentName);
+                            command.Parameters.AddWithValue("@comments", asset.Comments ?? (object)DBNull.Value);
 
-                        return true;
+                            int id = Convert.ToInt32(command.ExecuteScalar());
+
+                            string query2 = "INSERT INTO distributions (asset_id, responsibility, place, issue_date) VALUES(@asset_id, @responsibility, @place, @issue_date)";
+                            using (SQLiteCommand command2 = new SQLiteCommand(query2, connection))
+                            {
+                                command2.Parameters.AddWithValue("@asset_id", id);
+                                command2.Parameters.AddWithValue("@responsibility", asset.Distribution.Responsibility);
+                                command2.Parameters.AddWithValue("@place", asset.Distribution.Place);
+                                command2.Parameters.AddWithValue("@issue_date", asset.Distribution.IssueDate);
+                                command2.ExecuteNonQuery();
+                            }
+
+                            if (!string.IsNullOrWhiteSpace(asset.Comments))
+                            {
+                                using (var command3 = new SQLiteCommand("INSERT INTO comments (asset_id, comment_timestamp, comments) VALUES (@assetId, @commentTimeStamp, @comments)", connection))
+                                {
+                                    command3.Parameters.AddWithValue("@assetId", id);
+                                    command3.Parameters.AddWithValue("@commentTimeStamp", DateTime.Now);
+                                    command3.Parameters.AddWithValue("@comments", asset.Comments);
+                                    command3.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                        transaction.Commit();
                     }
                 }
             }
@@ -194,6 +201,7 @@ namespace AssetManagementSystem.Services.ModelServices
                 Console.WriteLine(ex.Message);
                 return false;
             }
+            return true;
         }
 
         public static bool UpdateAsset(Asset asset)
@@ -204,43 +212,48 @@ namespace AssetManagementSystem.Services.ModelServices
                 using (var connection = new SQLiteConnection(DatabaseHelper.ConnectionString))
                 {
                     connection.Open();
-
-                    var command = new SQLiteCommand(connection);
-
-                    command.CommandText = "UPDATE assets SET name = @name, brand = @brand, " +
-                        "specifications = @specifications, procurement_date = @procurement_date, colour = @colour, " +
-                        "image = @image, price = @price, condition_category = @condition_category, quantity = @quantity, " +
-                        "minute_sheet_number = @minute_sheet_number, minute_sheet_document = @minute_sheet_document, " +
-                        "comments = @comments WHERE id = @id";
-
-                    command.Parameters.AddWithValue("@id", asset.Id);
-                    command.Parameters.AddWithValue("@name", asset.Name);
-                    command.Parameters.AddWithValue("@brand", asset.Brand ?? string.Empty);
-                    command.Parameters.AddWithValue("@specifications", asset.Specifications ?? string.Empty);
-                    command.Parameters.AddWithValue("@procurement_date", asset.ProcurementDate);
-                    command.Parameters.AddWithValue("@colour", asset.Colour ?? string.Empty);
-                    command.Parameters.AddWithValue("@image", asset.Image ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@price", asset.Price);
-                    command.Parameters.AddWithValue("@condition_category", asset.ConditionCategory);
-                    command.Parameters.AddWithValue("@quantity", asset.Quantity);
-                    command.Parameters.AddWithValue("@minute_sheet_number", asset.MinuteSheetNumber);
-                    command.Parameters.AddWithValue("@minute_sheet_document", asset.MinuteSheetDocument ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@comments", asset.Comments ?? string.Empty);
-                    int rowsUpdated = command.ExecuteNonQuery();
-
-                    string query2 = "INSERT INTO distributions(asset_id, responsibility, place, issue_date) VALUES(@asset_id, @responsibility, @place, @issue_date)";
-                    using (SQLiteCommand command2 = new SQLiteCommand(query2, connection))
+                    using (var transaction = connection.BeginTransaction())
                     {
-                        command2.Parameters.AddWithValue("@asset_id", asset.Id);
-                        command2.Parameters.AddWithValue("@responsibility", asset.Distribution.Responsibility);
-                        command2.Parameters.AddWithValue("@place", asset.Distribution.Place);
-                        command2.Parameters.AddWithValue("@issue_date", asset.Distribution.IssueDate);
-                        command2.ExecuteNonQuery();
-                    }
 
-                    if (rowsUpdated > 0)
-                    {
-                        result = true;
+                        var command = new SQLiteCommand(connection);
+
+                        command.CommandText = "UPDATE assets SET name = @name, brand = @brand, " +
+                            "specifications = @specifications, procurement_date = @procurement_date, colour = @colour, " +
+                            "image = @image, price = @price, condition_category = @condition_category, quantity = @quantity, " +
+                            "minute_sheet_number = @minute_sheet_number, minute_sheet_document = @minute_sheet_document, m_s_document_name = @m_s_document_name, " +
+                            "comments = @comments WHERE id = @id";
+
+                        command.Parameters.AddWithValue("@id", asset.Id);
+                        command.Parameters.AddWithValue("@name", asset.Name);
+                        command.Parameters.AddWithValue("@brand", asset.Brand ?? string.Empty);
+                        command.Parameters.AddWithValue("@specifications", asset.Specifications ?? string.Empty);
+                        command.Parameters.AddWithValue("@procurement_date", asset.ProcurementDate);
+                        command.Parameters.AddWithValue("@colour", asset.Colour ?? string.Empty);
+                        command.Parameters.AddWithValue("@image", asset.Image ?? (object)DBNull.Value);
+                        command.Parameters.AddWithValue("@price", asset.Price);
+                        command.Parameters.AddWithValue("@condition_category", asset.ConditionCategory);
+                        command.Parameters.AddWithValue("@quantity", asset.Quantity);
+                        command.Parameters.AddWithValue("@minute_sheet_number", asset.MinuteSheetNumber);
+                        command.Parameters.AddWithValue("@minute_sheet_document", asset.MinuteSheetDocument ?? (object)DBNull.Value);
+                        command.Parameters.AddWithValue("@m_s_document_name", asset.MS_DocumentName);
+                        command.Parameters.AddWithValue("@comments", asset.Comments ?? string.Empty);
+                        int rowsUpdated = command.ExecuteNonQuery();
+
+                        string query2 = "INSERT INTO distributions(asset_id, responsibility, place, issue_date) VALUES(@asset_id, @responsibility, @place, @issue_date)";
+                        using (SQLiteCommand command2 = new SQLiteCommand(query2, connection))
+                        {
+                            command2.Parameters.AddWithValue("@asset_id", asset.Id);
+                            command2.Parameters.AddWithValue("@responsibility", asset.Distribution.Responsibility);
+                            command2.Parameters.AddWithValue("@place", asset.Distribution.Place);
+                            command2.Parameters.AddWithValue("@issue_date", asset.Distribution.IssueDate);
+                            command2.ExecuteNonQuery();
+                        }
+
+                        if (rowsUpdated > 0)
+                        {
+                            result = true;
+                        }
+                        transaction.Commit();
                     }
                 }
             }

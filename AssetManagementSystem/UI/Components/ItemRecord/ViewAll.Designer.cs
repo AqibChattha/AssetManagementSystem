@@ -101,8 +101,8 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(315, 32);
             this.label2.TabIndex = 7;
-            this.label2.Text = " “There are currently no items in inventory, please use the ‘Add Item’ button on " +
-    "the top-right corner to add a new item.”";
+            this.label2.Text = " “Currently there are no items in inventory. Please use the Add Item” button on t" +
+    "he top-right corner to add new items.\r\n";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnAddItem

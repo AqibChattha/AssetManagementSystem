@@ -44,6 +44,14 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             {
                 List<Asset> assets = AssetServices.GetAllAssets(currentPage, PAGE_SIZE, true);
                 SetAssetCardInPanel(assets);
+                if (AssetServices.GetTotalPages(PAGE_SIZE, true) <= 1)
+                {
+                    panel2.Visible = false;
+                }
+                else
+                {
+                    panel2.Visible = true;
+                }
             }
             catch (Exception)
             {

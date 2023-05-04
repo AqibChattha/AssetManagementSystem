@@ -49,7 +49,7 @@ namespace AssetManagementSystem.Services.ModelServices
             {
                 connection.Open();
 
-                using (var command = new SQLiteCommand("SELECT * FROM comments where asset_id = @assetId", connection))
+                using (var command = new SQLiteCommand("SELECT * FROM comments WHERE asset_id = @assetId ORDER BY comment_timestamp DESC LIMIT -1 OFFSET 1", connection))
                 {
                     command.Parameters.AddWithValue("@assetId", assetId);
                     using (var reader = command.ExecuteReader())
@@ -70,7 +70,7 @@ namespace AssetManagementSystem.Services.ModelServices
 
             return comments;
         }
-
+        
         public static PreviousComments GetCommentById(int id)
         {
             using (var connection = new SQLiteConnection(DatabaseHelper.ConnectionString))

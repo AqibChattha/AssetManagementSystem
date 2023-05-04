@@ -16,6 +16,8 @@ namespace AssetManagementSystem.UI
 		private Button currentButton;
 		private User user;
 
+        public User LoggedInUser { get { return user; } private set { user = value; } }
+
 		// Singleton pattern to ensure we get the same Main form.
 		private static MainForm _instance;
 		public static MainForm Instance
@@ -31,9 +33,14 @@ namespace AssetManagementSystem.UI
 			InitializeComponent();
 			_instance = this;
             this.user = user;
-			currentButton = btnItemRecords;
-			currentButton.BackColor = Color.FromArgb(21, 50, 132);
+            currentButton = btnItemRecords;
+            currentButton.BackColor = Color.FromArgb(21, 50, 132);
             ShowUserControl(Components.ItemRecord.ViewAll.Instance);
+            if (user.Role == 1 || user.Role == 2)
+            {
+                btnArchive.Visible = false;
+                btnArchive.Enabled = false;
+            }
         }
 
         private void ChangeCurrentButton(ref Button btn)

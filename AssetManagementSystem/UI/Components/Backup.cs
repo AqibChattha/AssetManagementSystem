@@ -1,4 +1,5 @@
 ﻿using AssetManagementSystem.Services;
+using AssetManagementSystem.Services.ModelServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,41 +32,27 @@ namespace AssetManagementSystem.UI.Components
 		private Backup()
 		{
 			InitializeComponent();
+            comboBox1.SelectedIndex = 0;
 		}
 
 		private void btnBackup_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBox1.Text))
-            {
-                MessageBox.Show("Please select a backup location.");
-                return;
-            }
-
-            if (!Directory.Exists(textBox1.Text))
-            {
-                MessageBox.Show("The given location does not exist please select the location again.");
-                return;
-            }
-
-            DialogResult confirmResult = MessageBox.Show(
-                $"Do you want to create a backup of the database at: \n{textBox1.Text}",
-                "Confirm Backup",
-                MessageBoxButtons.YesNo);
-
-            if (confirmResult != DialogResult.Yes)
-            {
-                return;
-            }
-
             try
             {
-                DatabaseHelper.CopyDatabase("..\\..\\Data\\Database\\AssetManagementSystem.db", textBox1.Text +  $"\\AMS_Backup_{DateTime.Now.ToString("dd-MM-yyyy HH-mm")}.db");
-                MessageBox.Show($"Database backup created at: \n{textBox1.Text}");
+                if (Directory.Exists(textBox1.Text) && comboBox1.SelectedItem != null)
+                {
+                    BackupService.SetBackup(textBox1.Text, comboBox1.SelectedItem.ToString());
+                    MessageBox.Show("Backup is set successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Please choose the valid backup location or interval.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error creating database backup: \n{ex.Message}");
-            }
+                MessageBox.Show("Error while setting the backup.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }   
         }
 
         private void button1_Click(object sender, EventArgs e)

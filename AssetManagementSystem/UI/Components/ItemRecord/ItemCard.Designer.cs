@@ -34,10 +34,10 @@
             this.lbQuantity = new System.Windows.Forms.Label();
             this.lbItemName = new System.Windows.Forms.Label();
             this.lbConditionCategory = new System.Windows.Forms.Label();
+            this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnDetails = new System.Windows.Forms.Button();
             this.lbComments = new System.Windows.Forms.Label();
-            this.btnEdit = new System.Windows.Forms.Button();
             this.pbImage = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -46,6 +46,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
             this.groupBox1.Controls.Add(this.btnEdit);
             this.groupBox1.Controls.Add(this.btnDelete);
@@ -54,7 +57,7 @@
             this.groupBox1.Controls.Add(this.pbImage);
             this.groupBox1.Location = new System.Drawing.Point(10, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(260, 320);
+            this.groupBox1.Size = new System.Drawing.Size(288, 340);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             // 
@@ -62,17 +65,17 @@
             // 
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.97048F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.02952F));
             this.tableLayoutPanel1.Controls.Add(this.lbQuantity, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lbItemName, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lbConditionCategory, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 172);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 190);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(243, 38);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(271, 38);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
             // lbQuantity
@@ -101,15 +104,31 @@
             // 
             this.lbConditionCategory.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbConditionCategory.AutoSize = true;
-            this.lbConditionCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(194)))), ((int)(((byte)(240)))), ((int)(((byte)(194)))));
+            this.lbConditionCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.lbConditionCategory.Font = new System.Drawing.Font("Simplified Arabic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbConditionCategory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(144)))), ((int)(((byte)(35)))));
-            this.lbConditionCategory.Location = new System.Drawing.Point(152, 0);
+            this.lbConditionCategory.ForeColor = System.Drawing.Color.Red;
+            this.lbConditionCategory.Location = new System.Drawing.Point(134, 0);
             this.lbConditionCategory.Name = "lbConditionCategory";
-            this.lbConditionCategory.Size = new System.Drawing.Size(88, 19);
+            this.lbConditionCategory.Size = new System.Drawing.Size(134, 19);
             this.lbConditionCategory.TabIndex = 6;
-            this.lbConditionCategory.Text = "Serviceable (SA)";
+            this.lbConditionCategory.Text = "Partially serviceable (PWS)";
             this.lbConditionCategory.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(138)))), ((int)(((byte)(0)))));
+            this.btnEdit.FlatAppearance.BorderSize = 0;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEdit.ForeColor = System.Drawing.Color.White;
+            this.btnEdit.Location = new System.Drawing.Point(108, 310);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(73, 24);
+            this.btnEdit.TabIndex = 9;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 
@@ -119,7 +138,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(6, 290);
+            this.btnDelete.Location = new System.Drawing.Point(9, 310);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(73, 24);
             this.btnDelete.TabIndex = 9;
@@ -129,13 +148,13 @@
             // 
             // btnDetails
             // 
-            this.btnDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDetails.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(117)))), ((int)(((byte)(255)))));
             this.btnDetails.FlatAppearance.BorderSize = 0;
             this.btnDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDetails.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDetails.ForeColor = System.Drawing.Color.White;
-            this.btnDetails.Location = new System.Drawing.Point(181, 290);
+            this.btnDetails.Location = new System.Drawing.Point(204, 310);
             this.btnDetails.Name = "btnDetails";
             this.btnDetails.Size = new System.Drawing.Size(73, 24);
             this.btnDetails.TabIndex = 9;
@@ -148,27 +167,11 @@
             this.lbComments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbComments.Font = new System.Drawing.Font("Simplified Arabic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbComments.Location = new System.Drawing.Point(9, 213);
+            this.lbComments.Location = new System.Drawing.Point(9, 232);
             this.lbComments.Name = "lbComments";
-            this.lbComments.Size = new System.Drawing.Size(243, 72);
+            this.lbComments.Size = new System.Drawing.Size(271, 72);
             this.lbComments.TabIndex = 5;
             this.lbComments.Text = "With 2 rods and 1200 watts power rating. This heater has 5 meter long cable.";
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(138)))), ((int)(((byte)(0)))));
-            this.btnEdit.FlatAppearance.BorderSize = 0;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.ForeColor = System.Drawing.Color.White;
-            this.btnEdit.Location = new System.Drawing.Point(94, 290);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(73, 24);
-            this.btnEdit.TabIndex = 9;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.UseVisualStyleBackColor = false;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // pbImage
             // 
@@ -178,8 +181,8 @@
             this.pbImage.Image = ((System.Drawing.Image)(resources.GetObject("pbImage.Image")));
             this.pbImage.Location = new System.Drawing.Point(9, 19);
             this.pbImage.Name = "pbImage";
-            this.pbImage.Size = new System.Drawing.Size(243, 148);
-            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbImage.Size = new System.Drawing.Size(271, 168);
+            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbImage.TabIndex = 4;
             this.pbImage.TabStop = false;
             // 
@@ -189,7 +192,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
             this.Name = "ItemCard";
-            this.Size = new System.Drawing.Size(280, 340);
+            this.Size = new System.Drawing.Size(308, 360);
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

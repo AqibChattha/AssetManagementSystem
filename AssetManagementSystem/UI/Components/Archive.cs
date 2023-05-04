@@ -43,10 +43,24 @@ namespace AssetManagementSystem.UI.Components
         private void LoadAssetsData()
         {
             flowLayoutPanel1.Controls.Clear();
-            List<Asset> assets = AssetServices.GetAllAssets(currentPage, PAGE_SIZE, false);
-            SetAssetCardInPanel(assets);
-            btnNext.Enabled = true;
-            btnPrev.Enabled = true;
+            try
+            {
+                List<Asset> assets = AssetServices.GetAllAssets(currentPage, PAGE_SIZE, false);
+
+                if (AssetServices.GetTotalPages(PAGE_SIZE, false) <= 1)
+                {
+                    panel2.Visible = false;
+                }
+                else
+                {
+                    panel2.Visible = true;
+                }
+                SetAssetCardInPanel(assets);
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         public void SetAssetCardInPanel(List<Asset> assets)
@@ -104,7 +118,7 @@ namespace AssetManagementSystem.UI.Components
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            int totalPages = AssetServices.GetTotalPages(PAGE_SIZE, true);
+            int totalPages = AssetServices.GetTotalPages(PAGE_SIZE, false);
             if (currentPage < totalPages)
             {
                 currentPage++;
@@ -131,7 +145,7 @@ namespace AssetManagementSystem.UI.Components
                     try
                     {
                         int cPage = Convert.ToInt32(textBox1.Text);
-                        if (cPage >= 1 && cPage <= AssetServices.GetTotalPages(PAGE_SIZE, true))
+                        if (cPage >= 1 && cPage <= AssetServices.GetTotalPages(PAGE_SIZE, false))
                         {
                             currentPage = cPage;
                             LoadAssetsData();

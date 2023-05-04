@@ -1,4 +1,5 @@
 ﻿using AssetManagementSystem.Services;
+using AssetManagementSystem.Services.ModelServices;
 using AssetManagementSystem.UI;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,9 @@ namespace AssetManagementSystem
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			DatabaseHelper.InitializeDatabase();
-			Application.Run(new LoginForm());
-		}
+			try { BackupService.CheckBackup(); } catch (Exception) { }
+            Application.Run(new LoginForm());
+            try { BackupService.CheckBackup(); } catch (Exception) { }
+        }
 	}
 }

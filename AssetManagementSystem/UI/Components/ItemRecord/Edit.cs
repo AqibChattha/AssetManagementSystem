@@ -18,6 +18,7 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
     {
         private Asset assetData;
         private byte[] document;
+        private string documentName;
 
         private static Edit _instance;
         public static Edit Instance
@@ -34,7 +35,7 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
         {
             InitializeComponent();
         }
-        
+
         public void Refresh(Asset asset)
         {
             label1.Visible = true;
@@ -42,7 +43,9 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             lbConditionCategory.Text = asset.ConditionCategory;
             lbItemNumber.Text = "Item # " + asset.Id;
 
-            tbItemNo.Text = asset.Id.ToString();
+            document = asset.MinuteSheetDocument;
+            documentName = asset.MS_DocumentName;
+
             assetData = asset;
             tbItemName.Text = asset.Name;
             tbBrand.Text = asset.Brand;
@@ -81,9 +84,11 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
         private void LoadComments(List<PreviousComments> comments)
         {
             pnlComments.Controls.Clear();
-            if (comments.Count < 10)
+            if (comments.Count <= 0)
             {
-                label1.Visible = false;
+                Label lb = new Label();
+                lb.Text = "No to show comments yet.";
+                pnlComments.Controls.Add(lb);
             }
             else
             {
@@ -105,6 +110,7 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             {
                 // Store the document bytes in the local property
                 document = File.ReadAllBytes(dialog.FileName);
+                documentName = dialog.SafeFileName;
 
                 // Change the button text to indicate that a file has been selected
                 btn_MSN_Docunent.Text = Path.GetFileName(dialog.FileName);
@@ -152,9 +158,9 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
                         dtp_DOP.Value,
                         cmb_Color.SelectedItem?.ToString(),
                         ImageToByteArray(pbImage.Image),
-                        Convert.ToDecimal(tbPrice.Text),
+                        tbPrice.Text,
                         cmb_ConditionCategory.SelectedItem?.ToString(),
-                        Convert.ToInt32(tbQuantity.Text),
+                        tbQuantity.Text,
                         tb_MSN.SelectedText,
                         document,
                         rtb_Remarks.Text,
@@ -163,6 +169,7 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
                         dtp_DOI.Value
                     ))
                 {
+                    MessageBox.Show("Asset updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     MainForm.Instance.ShowUserControl(ViewAll.Instance);
                 }
                 else
@@ -184,20 +191,52 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
         }
 
         public bool UpdateAsset(string name, string brand, string specifications, DateTime procurementDate,
-            string colour, byte[] image, decimal price, string conditionCategory, int quantity, string minuteSheetNumber, byte[] minuteSheetDocument, string comments,
+            string colour, byte[] image, string price, string conditionCategory, string quantity, string minuteSheetNumber, byte[] minuteSheetDocument, string comments,
             string responsibleOfficial, string place, DateTime doi)
         {
+            decimal dprice;
+            int iquantity;
             // Perform validation checks
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Name cannot be null or empty.");
-            if (string.IsNullOrWhiteSpace(conditionCategory))
-                throw new ArgumentException("Condition category cannot be null or empty.");
-            if (quantity < 0)
+            if (string.IsNullOrWhiteSpace(price))
+                throw new ArgumentException("Please enter the asset price.");
+            try
+            {
+                dprice = Convert.ToDecimal(price);
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Price must be a number.");
+            }
+            if (dprice < 0)
+                throw new ArgumentException("Price must be a positive value.");
+            if (string.IsNullOrWhiteSpace(quantity))
+                throw new ArgumentException("Please enter the asset quantity.");
+            try
+            {
+                iquantity = Convert.ToInt32(quantity);
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Quantity must be a number.");
+            }
+            if (iquantity < 0)
                 throw new ArgumentException("Quantity must be a positive integer.");
+            if (string.IsNullOrWhiteSpace(brand))
+                throw new ArgumentException("Please enter the asset brand.");
+            if (string.IsNullOrWhiteSpace(conditionCategory))
+                throw new ArgumentException("Please enter the asset condition category.");
+            if (string.IsNullOrWhiteSpace(colour))
+                throw new ArgumentException("Please select an asset color.");
+            if (string.IsNullOrWhiteSpace(specifications))
+                throw new ArgumentException("Please enter the asset specifications.");
+            if (string.IsNullOrWhiteSpace(minuteSheetNumber))
+                throw new ArgumentException("Please enter the minute sheet number.");
             if (string.IsNullOrWhiteSpace(responsibleOfficial))
-                throw new ArgumentException("Responsible official name cannot be null or empty.");
+                throw new ArgumentException("Please enter the responsible official name ");
             if (string.IsNullOrWhiteSpace(place))
-                throw new ArgumentException("Place cannot be null or empty.");
+                throw new ArgumentException("Please enter the distribution place.");
 
             assetData.Name = name;
             assetData.Brand = brand;
@@ -205,11 +244,12 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             assetData.ProcurementDate = procurementDate;
             assetData.Colour = colour;
             assetData.Image = image;
-            assetData.Price = price;
+            assetData.Price = dprice;
             assetData.ConditionCategory = conditionCategory;
-            assetData.Quantity = quantity;
+            assetData.Quantity = iquantity;
             assetData.MinuteSheetNumber = minuteSheetNumber;
             assetData.MinuteSheetDocument = minuteSheetDocument;
+            assetData.MS_DocumentName = documentName;
             if (!assetData.Comments.Equals(comments))
             {
                 PreviousComments comment = new PreviousComments
@@ -236,6 +276,17 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             catch (Exception)
             {
 
+            }
+        }
+
+        private void cmb_ConditionCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmb_ConditionCategory.SelectedItem != null && cmb_ConditionCategory.SelectedItem.ToString().Equals("Unserviceable (US)"))
+            {
+                if (MessageBox.Show("Are you sure you want to mark this item as Unserviceable (US)? Doing so will delete this from the available items list and it will be moved to archived items.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+                {
+                    cmb_ConditionCategory.SelectedIndex = 0;
+                }
             }
         }
     }

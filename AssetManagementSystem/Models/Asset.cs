@@ -20,6 +20,7 @@ namespace AssetManagementSystem.Models
         public int Quantity { get; set; }
         public string MinuteSheetNumber { get; set; }
         public byte[] MinuteSheetDocument { get; set; }
+        public string MS_DocumentName { get; set; }
         public string Comments { get; set; }
 
         private Distribution _distribution = new Distribution();
@@ -28,5 +29,7 @@ namespace AssetManagementSystem.Models
             get { return _distribution; }
             set { _distribution = value; }
         }
+
+        public object AssetServices { get; internal set; }
     }
 }

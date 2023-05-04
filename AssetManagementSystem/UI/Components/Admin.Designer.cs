@@ -164,8 +164,8 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(304, 37);
             this.label6.TabIndex = 21;
-            this.label6.Text = "To access the admin area, log out from the current account and login as an admin " +
-    "from the login screen.";
+            this.label6.Text = "To access the admin area, log out from the current account and login as an level-" +
+    "1 or level-2 user from the login screen.";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox1
