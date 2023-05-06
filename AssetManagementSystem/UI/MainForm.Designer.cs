@@ -64,8 +64,9 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(207, 723);
+            this.panel1.Size = new System.Drawing.Size(275, 890);
             this.panel1.TabIndex = 0;
             // 
             // btnAdmin
@@ -78,9 +79,10 @@
             this.btnAdmin.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdmin.ForeColor = System.Drawing.Color.White;
             this.btnAdmin.Image = ((System.Drawing.Image)(resources.GetObject("btnAdmin.Image")));
-            this.btnAdmin.Location = new System.Drawing.Point(0, 318);
+            this.btnAdmin.Location = new System.Drawing.Point(0, 389);
+            this.btnAdmin.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.btnAdmin.Name = "btnAdmin";
-            this.btnAdmin.Size = new System.Drawing.Size(207, 40);
+            this.btnAdmin.Size = new System.Drawing.Size(275, 49);
             this.btnAdmin.TabIndex = 13;
             this.btnAdmin.Text = "  Admin    ";
             this.btnAdmin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -98,9 +100,10 @@
             this.btnArchive.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnArchive.ForeColor = System.Drawing.Color.White;
             this.btnArchive.Image = ((System.Drawing.Image)(resources.GetObject("btnArchive.Image")));
-            this.btnArchive.Location = new System.Drawing.Point(0, 278);
+            this.btnArchive.Location = new System.Drawing.Point(0, 340);
+            this.btnArchive.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.btnArchive.Name = "btnArchive";
-            this.btnArchive.Size = new System.Drawing.Size(207, 40);
+            this.btnArchive.Size = new System.Drawing.Size(275, 49);
             this.btnArchive.TabIndex = 12;
             this.btnArchive.Text = "  Archive  ";
             this.btnArchive.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -118,9 +121,10 @@
             this.btnBackup.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBackup.ForeColor = System.Drawing.Color.White;
             this.btnBackup.Image = ((System.Drawing.Image)(resources.GetObject("btnBackup.Image")));
-            this.btnBackup.Location = new System.Drawing.Point(0, 238);
+            this.btnBackup.Location = new System.Drawing.Point(0, 291);
+            this.btnBackup.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.btnBackup.Name = "btnBackup";
-            this.btnBackup.Size = new System.Drawing.Size(207, 40);
+            this.btnBackup.Size = new System.Drawing.Size(275, 49);
             this.btnBackup.TabIndex = 11;
             this.btnBackup.Text = "  Backup   ";
             this.btnBackup.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -138,9 +142,10 @@
             this.btn_AddItem.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_AddItem.ForeColor = System.Drawing.Color.White;
             this.btn_AddItem.Image = ((System.Drawing.Image)(resources.GetObject("btn_AddItem.Image")));
-            this.btn_AddItem.Location = new System.Drawing.Point(0, 198);
+            this.btn_AddItem.Location = new System.Drawing.Point(0, 242);
+            this.btn_AddItem.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.btn_AddItem.Name = "btn_AddItem";
-            this.btn_AddItem.Size = new System.Drawing.Size(207, 40);
+            this.btn_AddItem.Size = new System.Drawing.Size(275, 49);
             this.btn_AddItem.TabIndex = 10;
             this.btn_AddItem.Text = "  Add Item ";
             this.btn_AddItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -158,9 +163,10 @@
             this.btnLogout.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.Color.White;
             this.btnLogout.Image = ((System.Drawing.Image)(resources.GetObject("btnLogout.Image")));
-            this.btnLogout.Location = new System.Drawing.Point(0, 652);
+            this.btnLogout.Location = new System.Drawing.Point(0, 803);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(207, 40);
+            this.btnLogout.Size = new System.Drawing.Size(275, 49);
             this.btnLogout.TabIndex = 9;
             this.btnLogout.Text = "  Logout   ";
             this.btnLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -172,9 +178,10 @@
             // 
             this.panel4.Controls.Add(this.label3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 692);
+            this.panel4.Location = new System.Drawing.Point(0, 852);
+            this.panel4.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(207, 31);
+            this.panel4.Size = new System.Drawing.Size(275, 38);
             this.panel4.TabIndex = 7;
             // 
             // label3
@@ -182,9 +189,10 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(67, 9);
+            this.label3.Location = new System.Drawing.Point(89, 11);
+            this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 13);
+            this.label3.Size = new System.Drawing.Size(81, 16);
             this.label3.TabIndex = 0;
             this.label3.Text = "© AMS - v1.0";
             // 
@@ -192,9 +200,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(36, 92);
+            this.label2.Location = new System.Drawing.Point(48, 113);
+            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(135, 13);
+            this.label2.Size = new System.Drawing.Size(171, 16);
             this.label2.TabIndex = 6;
             this.label2.Text = "Asset Management System";
             // 
@@ -203,7 +212,8 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(75, 62);
+            this.label1.Location = new System.Drawing.Point(101, 78);
+            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 30);
             this.label1.TabIndex = 0;
@@ -219,9 +229,10 @@
             this.btnItemRecords.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnItemRecords.ForeColor = System.Drawing.Color.White;
             this.btnItemRecords.Image = ((System.Drawing.Image)(resources.GetObject("btnItemRecords.Image")));
-            this.btnItemRecords.Location = new System.Drawing.Point(0, 158);
+            this.btnItemRecords.Location = new System.Drawing.Point(0, 193);
+            this.btnItemRecords.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.btnItemRecords.Name = "btnItemRecords";
-            this.btnItemRecords.Size = new System.Drawing.Size(207, 40);
+            this.btnItemRecords.Size = new System.Drawing.Size(275, 49);
             this.btnItemRecords.TabIndex = 0;
             this.btnItemRecords.Text = "  All Items";
             this.btnItemRecords.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -232,17 +243,19 @@
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 143);
+            this.panel3.Location = new System.Drawing.Point(0, 176);
+            this.panel3.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(207, 15);
+            this.panel3.Size = new System.Drawing.Size(275, 17);
             this.panel3.TabIndex = 1;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(207, 143);
+            this.pictureBox1.Size = new System.Drawing.Size(275, 176);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -250,19 +263,23 @@
             // 
             this.pnlContant.BackColor = System.Drawing.Color.White;
             this.pnlContant.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContant.Location = new System.Drawing.Point(207, 0);
+            this.pnlContant.Location = new System.Drawing.Point(275, 0);
+            this.pnlContant.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.pnlContant.Name = "pnlContant";
-            this.pnlContant.Size = new System.Drawing.Size(888, 723);
+            this.pnlContant.Size = new System.Drawing.Size(1186, 890);
             this.pnlContant.TabIndex = 1;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1095, 723);
+            this.ClientSize = new System.Drawing.Size(1461, 890);
             this.Controls.Add(this.pnlContant);
             this.Controls.Add(this.panel1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Asset Management System";

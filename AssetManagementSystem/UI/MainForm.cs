@@ -36,7 +36,7 @@ namespace AssetManagementSystem.UI
             currentButton = btnItemRecords;
             currentButton.BackColor = Color.FromArgb(21, 50, 132);
             ShowUserControl(Components.ItemRecord.ViewAll.Instance);
-            if (user.Role == 1 || user.Role == 2)
+            if (user.Role == 3)
             {
                 btnArchive.Visible = false;
                 btnArchive.Enabled = false;

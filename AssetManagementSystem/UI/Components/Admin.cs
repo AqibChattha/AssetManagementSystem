@@ -143,5 +143,15 @@ namespace AssetManagementSystem.UI.Components
                 MessageBox.Show("Sorry you are current logged in a " + user.Username + ", but you need level 1 or 2 to be able to access this.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void cbOldPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            txtOldPassword.UseSystemPasswordChar = !cbOldPassword.Checked;
+        }
+
+        private void cbNewPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            txtNewPassword.UseSystemPasswordChar = !cbNewPassword.Checked;
+        }
     }
 }

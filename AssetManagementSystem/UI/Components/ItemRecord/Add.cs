@@ -147,7 +147,7 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             catch (Exception)
             {
                 tbPrice.Focus();
-                throw new ArgumentException("Price must be a number.");
+                throw new ArgumentException("The Price field only accepts numbers (0-9) and a decimal (.) sign.");
             }
             if (dprice < 0)
             {

@@ -46,6 +46,9 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             document = asset.MinuteSheetDocument;
             documentName = asset.MS_DocumentName;
 
+            btn_Image.Text = "Update Image";
+            btn_MSN_Docunent.Text = "Update Document";
+
             assetData = asset;
             tbItemName.Text = asset.Name;
             tbBrand.Text = asset.Brand;
@@ -62,6 +65,12 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             {
                 pbImage.Image = Image.FromStream(new MemoryStream(asset.Image));
             }
+            else
+            {
+                pbImage.Image = null;
+            }
+
+
             tbPrice.Text = asset.Price.ToString();
             foreach (var item in cmb_ConditionCategory.Items)
             {
@@ -86,13 +95,11 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             pnlComments.Controls.Clear();
             if (comments.Count < 1)
             {
-                Label lb = new Label();
-                lb.Text = "There are no comments to show yet.";
-                lb.AutoSize = true;
-                pnlComments.Controls.Add(lb);
+                panel6.Visible = true;
             }
             else
             {
+                panel6.Visible = false;
                 foreach (var item in comments)
                 {
                     PreviousRemark previousRemark = new PreviousRemark(item);
@@ -141,6 +148,10 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
 
         public byte[] ImageToByteArray(Image image)
         {
+            if (image == null)
+            {
+                return null;
+            }
             using (MemoryStream ms = new MemoryStream())
             {
                 image.Save(ms, image.RawFormat);
@@ -320,6 +331,271 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
                     cmb_ConditionCategory.SelectedIndex = 0;
                 }
             }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel7_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlComments_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel6_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void groupBox4_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rtbSpecification_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox13_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rtb_Remarks_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void groupBox6_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmb_Color_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox8_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void groupBox7_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbPrice_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbBrand_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox9_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbQuantity_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbItemName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void groupBox14_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbImage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel8_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void gnProcurement_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void groupBox10_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tb_MSN_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox5_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtp_DOP_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox11_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox17_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel9_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void groupBox16_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtp_DOI_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox15_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbPlace_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox12_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbResponsibility_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void groupBox18_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel7_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lbItemName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbConditionCategory_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel6_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lbItemNumber_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

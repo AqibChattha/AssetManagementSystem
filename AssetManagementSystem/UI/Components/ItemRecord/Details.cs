@@ -71,13 +71,11 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             pnlComments.Controls.Clear();
             if (comments.Count <= 0)
             {
-                Label lb = new Label();
-                lb.AutoSize= true;
-                lb.Text = "     There are no comments to show yet.";
-                pnlComments.Controls.Add(lb);
+                panel6.Visible = true;
             }
             else
             {
+                panel6.Visible = false;
                 foreach (var item in comments)
                 {
                     PreviousRemark previousRemark = new PreviousRemark(item);

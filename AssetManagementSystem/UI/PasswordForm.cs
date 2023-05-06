@@ -19,7 +19,7 @@ namespace AssetManagementSystem.UI
         {
             InitializeComponent();
             user = forUser;
-            label1.Text = "Enter password for " + forUser.Username;
+            label2.Text = forUser.Username + " please authorise the delete action.";
         }
 
         private void btnAddItem_Click(object sender, EventArgs e)
@@ -27,12 +27,12 @@ namespace AssetManagementSystem.UI
             if (txtPassword.Text.Equals(user.Password))
             {
                 this.DialogResult = DialogResult.Yes;
+                this.Close();
             }
             else
             {
                 MessageBox.Show("Incorrect Password, try again.", "Wrong Password", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
-            this.Close();
         }
 
         private void cbShowPassword_CheckedChanged(object sender, EventArgs e)

@@ -33,7 +33,7 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
             {
                 lbConditionCategory.BackColor = Color.FromArgb(255, 224, 192);
                 lbConditionCategory.ForeColor = Color.FromArgb(255, 128, 0);
-            } 
+            }
             else if (_asset.ConditionCategory.Equals("Unserviceable (US)"))
             {
                 lbConditionCategory.BackColor = Color.FromArgb(255, 192, 192);
@@ -77,8 +77,19 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
                         MessageBox.Show("The asset has been deleted successfully.", "Delete Asset", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         try
                         {
-                            AssetServices.DeleteAsset(_asset.Id);
-                            Archive.Instance.RemoveAssetCard(this);
+                            if (_asset.ConditionCategory.Equals("Unserviceable (US)"))
+                            {
+                                AssetServices.DeleteAsset(_asset.Id);
+                                MessageBox.Show("The asset has been deleted successfully.", "Delete Asset", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                Archive.Instance.Refresh();
+                            }
+                            else
+                            {
+                                _asset.ConditionCategory = "Unserviceable (US)";
+                                AssetServices.UpdateAsset(_asset);
+                                MessageBox.Show("The asset has been moved to archive successfully.", "Delete Asset", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                ViewAll.Instance.Refresh();
+                            }
                         }
                         catch (Exception)
                         {
@@ -87,15 +98,55 @@ namespace AssetManagementSystem.UI.Components.ItemRecord
                     }
                 }
             }
-            else
+
+            if (MainForm.Instance.LoggedInUser.Role == 2)
+            {
+                PasswordForm level1Password = new PasswordForm(UserServices.GetUserByRole(1));
+                if (level1Password.ShowDialog() == DialogResult.Yes)
+                {
+                    try
+                    {
+                        if (_asset.ConditionCategory.Equals("Unserviceable (US)"))
+                        {
+                            AssetServices.DeleteAsset(_asset.Id);
+                            MessageBox.Show("The asset has been deleted successfully.", "Delete Asset", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            Archive.Instance.Refresh();
+                        }
+                        else
+                        {
+                            _asset.ConditionCategory = "Unserviceable (US)";
+                            AssetServices.UpdateAsset(_asset);
+                            MessageBox.Show("The asset has been moved to archive successfully.", "Delete Asset", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            ViewAll.Instance.Refresh();
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+            }
+
+            if (MainForm.Instance.LoggedInUser.Role == 1)
             {
                 DialogResult result = MessageBox.Show("Are you sure you want to permanently delete this assest?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
                     try
                     {
-                        AssetServices.DeleteAsset(_asset.Id);
-                        Archive.Instance.RemoveAssetCard(this);
+                        if (_asset.ConditionCategory.Equals("Unserviceable (US)"))
+                        {
+                            AssetServices.DeleteAsset(_asset.Id);
+                            MessageBox.Show("The asset has been deleted successfully.", "Delete Asset", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            Archive.Instance.Refresh();
+                        }
+                        else
+                        {
+                            _asset.ConditionCategory = "Unserviceable (US)";
+                            AssetServices.UpdateAsset(_asset);
+                            MessageBox.Show("The asset has been moved to archive successfully.", "Delete Asset", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            ViewAll.Instance.Refresh();
+                        }
                     }
                     catch (Exception)
                     {

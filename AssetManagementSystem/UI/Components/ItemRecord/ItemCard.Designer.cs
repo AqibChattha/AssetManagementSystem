@@ -55,9 +55,11 @@
             this.groupBox1.Controls.Add(this.btnDetails);
             this.groupBox1.Controls.Add(this.lbComments);
             this.groupBox1.Controls.Add(this.pbImage);
-            this.groupBox1.Location = new System.Drawing.Point(10, 10);
+            this.groupBox1.Location = new System.Drawing.Point(13, 12);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(288, 340);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(384, 418);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             // 
@@ -70,22 +72,24 @@
             this.tableLayoutPanel1.Controls.Add(this.lbQuantity, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lbItemName, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lbConditionCategory, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 190);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 234);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(271, 38);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(361, 47);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
             // lbQuantity
             // 
             this.lbQuantity.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbQuantity.AutoSize = true;
-            this.lbQuantity.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbQuantity.Location = new System.Drawing.Point(3, 21);
+            this.lbQuantity.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbQuantity.Location = new System.Drawing.Point(4, 27);
+            this.lbQuantity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbQuantity.Name = "lbQuantity";
-            this.lbQuantity.Size = new System.Drawing.Size(32, 14);
+            this.lbQuantity.Size = new System.Drawing.Size(32, 16);
             this.lbQuantity.TabIndex = 8;
             this.lbQuantity.Text = "#127";
             // 
@@ -93,10 +97,11 @@
             // 
             this.lbItemName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbItemName.AutoSize = true;
-            this.lbItemName.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbItemName.Location = new System.Drawing.Point(3, 2);
+            this.lbItemName.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbItemName.Location = new System.Drawing.Point(4, 3);
+            this.lbItemName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbItemName.Name = "lbItemName";
-            this.lbItemName.Size = new System.Drawing.Size(75, 14);
+            this.lbItemName.Size = new System.Drawing.Size(82, 16);
             this.lbItemName.TabIndex = 7;
             this.lbItemName.Text = "Room Heater";
             // 
@@ -107,9 +112,10 @@
             this.lbConditionCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.lbConditionCategory.Font = new System.Drawing.Font("Simplified Arabic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbConditionCategory.ForeColor = System.Drawing.Color.Red;
-            this.lbConditionCategory.Location = new System.Drawing.Point(134, 0);
+            this.lbConditionCategory.Location = new System.Drawing.Point(223, 1);
+            this.lbConditionCategory.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbConditionCategory.Name = "lbConditionCategory";
-            this.lbConditionCategory.Size = new System.Drawing.Size(134, 19);
+            this.lbConditionCategory.Size = new System.Drawing.Size(134, 20);
             this.lbConditionCategory.TabIndex = 6;
             this.lbConditionCategory.Text = "Partially serviceable (PWS)";
             this.lbConditionCategory.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -122,9 +128,10 @@
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.ForeColor = System.Drawing.Color.White;
-            this.btnEdit.Location = new System.Drawing.Point(108, 310);
+            this.btnEdit.Location = new System.Drawing.Point(144, 382);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(73, 24);
+            this.btnEdit.Size = new System.Drawing.Size(97, 30);
             this.btnEdit.TabIndex = 9;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = false;
@@ -138,9 +145,10 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(9, 310);
+            this.btnDelete.Location = new System.Drawing.Point(12, 382);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(73, 24);
+            this.btnDelete.Size = new System.Drawing.Size(97, 30);
             this.btnDelete.TabIndex = 9;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
@@ -154,9 +162,10 @@
             this.btnDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDetails.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDetails.ForeColor = System.Drawing.Color.White;
-            this.btnDetails.Location = new System.Drawing.Point(204, 310);
+            this.btnDetails.Location = new System.Drawing.Point(272, 382);
+            this.btnDetails.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDetails.Name = "btnDetails";
-            this.btnDetails.Size = new System.Drawing.Size(73, 24);
+            this.btnDetails.Size = new System.Drawing.Size(97, 30);
             this.btnDetails.TabIndex = 9;
             this.btnDetails.Text = "See Details";
             this.btnDetails.UseVisualStyleBackColor = false;
@@ -166,10 +175,11 @@
             // 
             this.lbComments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbComments.Font = new System.Drawing.Font("Simplified Arabic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbComments.Location = new System.Drawing.Point(9, 232);
+            this.lbComments.Font = new System.Drawing.Font("Simplified Arabic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbComments.Location = new System.Drawing.Point(12, 286);
+            this.lbComments.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbComments.Name = "lbComments";
-            this.lbComments.Size = new System.Drawing.Size(271, 72);
+            this.lbComments.Size = new System.Drawing.Size(361, 89);
             this.lbComments.TabIndex = 5;
             this.lbComments.Text = "With 2 rods and 1200 watts power rating. This heater has 5 meter long cable.";
             // 
@@ -179,20 +189,23 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pbImage.Image = ((System.Drawing.Image)(resources.GetObject("pbImage.Image")));
-            this.pbImage.Location = new System.Drawing.Point(9, 19);
+            this.pbImage.Location = new System.Drawing.Point(12, 23);
+            this.pbImage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pbImage.Name = "pbImage";
-            this.pbImage.Size = new System.Drawing.Size(271, 168);
+            this.pbImage.Size = new System.Drawing.Size(361, 207);
             this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbImage.TabIndex = 4;
             this.pbImage.TabStop = false;
             // 
             // ItemCard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ItemCard";
-            this.Size = new System.Drawing.Size(308, 360);
+            this.Size = new System.Drawing.Size(411, 443);
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

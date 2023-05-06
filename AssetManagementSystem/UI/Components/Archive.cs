@@ -65,10 +65,19 @@ namespace AssetManagementSystem.UI.Components
 
         public void SetAssetCardInPanel(List<Asset> assets)
         {
-            foreach (var item in assets)
+            flowLayoutPanel1.Controls.Clear();
+            if (assets.Count < 1)
             {
-                ItemCard card = new ItemCard(item);
-                flowLayoutPanel1.Controls.Add(card);
+                flowLayoutPanel1.Visible = false;
+            }
+            else
+            {
+                flowLayoutPanel1.Visible = true;
+                foreach (var item in assets)
+                {
+                    ItemCard card = new ItemCard(item);
+                    flowLayoutPanel1.Controls.Add(card);
+                }
             }
         }
 
